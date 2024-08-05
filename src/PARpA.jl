@@ -125,6 +125,9 @@ function build_y_X(y_normalized::Vector{Float64}, y_anual_normalized::Vector{Flo
             end
         end
     end
+    X_reg = hcat(X[p+1:end, :], y_anual_normalized_at_correct_stage[p+1:end])
+    y_reg = y_normalized_at_correct_stage[p+1:end]
+    
     weights_y_normalized_at_correct_stage = weights_y[correct_stage_idx]
     weights_y_reg = weights_y_normalized_at_correct_stage[p+1:end]
     return y_reg, X_reg, weights_y_reg
