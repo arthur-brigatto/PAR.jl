@@ -110,10 +110,10 @@ function build_y_X(y_normalized::Vector{Float64}, p::Int, stage::Int, seasonal::
 end
 
 function fit_ar!(ar::AR; stage::Int = 1, par_seasonal::Int = 1)
-    y_to_fit, X_to_fit, weights_y_to_fit = build_y_X(ar.y, ar.p, stage, par_seasonal)
+    y_to_fit, X_to_fit, weights_y_to_fit = build_y_X(ar.y, ar.p, stage, par_seasonal; ar.weights_y)
     ar.fitted_X = X_to_fit
     ar.fitted_y = y_to_fit
-    if all(iszero, y_to_fit; wts = weights_y_to_fit)
+    if all(iszero, y_to_fit)
         ar.ols = nothing
         ar.ϕ = [1.0]
         ar.coef_table = nothing
